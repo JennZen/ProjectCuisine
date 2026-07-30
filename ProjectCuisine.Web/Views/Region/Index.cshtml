@@ -1,0 +1,24 @@
+﻿@model List<ProjectCuisine.Application.DTOs.Region.RegionListDto>
+
+@{
+	ViewData["Title"] = "Regions";
+}
+
+<div class="container-fluid p-1 my-1 bg-primary text-white">
+	<h1>Explore every region!</h1>
+</div>
+
+<div class="row">
+@foreach(var region in Model)
+    {
+        <div class="card" style="width:400px; height:425px;">
+            <div class="card-body">
+                <h4 class="card-title">@region.Name</h4>
+                <a asp-controller="Region" asp-action="Details" asp-route-id="@region.Id" class="btn btn-primary">Details</a>
+            </div>
+            <img class="card-img-bottom; rounded" src="@region.ImageUrl" alt="@region.Name" style="width:100%; height:300px; object-fit:cover;">
+        </div>
+    }
+</div>
+
+

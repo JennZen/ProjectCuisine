@@ -1,0 +1,20 @@
+﻿using ProjectCuisine.Application.DTOs.Country;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjectCuisine.Application.DTOs.Region
+{
+    public class RegionPageDto
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; } = string.Empty;
+
+        public string ImageUrl { get; set; } = string.Empty;
+
+        public List<CountryListDto> Countries { get; set; } = new List<CountryListDto>();
+    }
+}
