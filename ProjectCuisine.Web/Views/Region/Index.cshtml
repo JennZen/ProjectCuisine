@@ -1,24 +1,47 @@
 ﻿@model List<ProjectCuisine.Application.DTOs.Region.RegionListDto>
 
 @{
-	ViewData["Title"] = "Regions";
+    ViewData["Title"] = "Regions";
 }
 
-<div class="container-fluid p-1 my-1 bg-primary text-white">
-	<h1>Explore every region!</h1>
+<style>
+    .region-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+     .region-card:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+     }
+</style>
+
+<div class="p-4 mb-4 bg-primary text-white text-center rounded-3 shadow-sm">
+    <h1 class="fw-bold m-0">Explore every region!</h1>
 </div>
 
-<div class="row">
-@foreach(var region in Model)
+<div class="row g-4">
+    @foreach (var region in Model)
     {
-        <div class="card" style="width:400px; height:425px;">
-            <div class="card-body">
-                <h4 class="card-title">@region.Name</h4>
-                <a asp-controller="Region" asp-action="Details" asp-route-id="@region.Id" class="btn btn-primary">Details</a>
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm region-card overflow-hidden">
+                <a asp-controller="Region" asp-action="Details" asp-route-id="@region.Id">
+                    <img class="card-img-top"
+                         src="@region.ImageUrl"
+                         alt="@region.Name"
+                         style="height: 220px; object-fit: cover;">
+                </a>
+
+                <div class="card-body d-flex flex-column justify-content-between p-3">
+                    <h4 class="card-title fw-bold text-dark mb-3">@region.Name</h4>
+
+                    <a asp-controller="Region"
+                       asp-action="Details"
+                       asp-route-id="@region.Id"
+                       class="btn btn-primary w-100 fw-semibold">
+                        Details
+                    </a>
+                </div>
             </div>
-            <img class="card-img-bottom; rounded" src="@region.ImageUrl" alt="@region.Name" style="width:100%; height:300px; object-fit:cover;">
         </div>
     }
 </div>
-
-

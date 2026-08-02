@@ -1,0 +1,26 @@
+﻿@model List<ProjectCuisine.Application.DTOs.Recipe.RecipeListDto>
+@{
+	ViewData["Title"] = $"{ViewBag.CountryName} Details";
+}
+
+<h1 class="container-fluid p-1 my-1 bg-gradient text-black text-center">
+	Explore recipes of @ViewBag.CountryName
+</h1>
+
+@if (!Model.Any())
+{
+	<h2 class="text-danger">No recipes found for this country.</h2>
+}
+
+<div class="row">
+	@foreach(var recipe in Model)
+	{
+		<div class="card" style="width:400px; height:425px;">
+			<div class="card-body">
+				<h4 class="card-title">@recipe.Name</h4>
+				<a href="#" class="btn btn-primary">Details</a>
+			</div>
+			<img class="card-img-bottom; rounded" src="@recipe.ImageUrl" alt="@recipe.Name" style="width:100%; height:300px; object-fit:cover;">
+		</div>
+	}
+</div>

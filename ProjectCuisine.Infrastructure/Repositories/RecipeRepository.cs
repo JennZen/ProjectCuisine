@@ -39,13 +39,13 @@ namespace ProjectCuisine.Infrastructure.Repositories
                 ToList();
         }
 
-        public List<Recipe> GetByRegion(int regionId)
+        public List<Recipe> GetByCountryId(int countryId)
         {
             return _context.Recipes.
                 Include(r => r.Category).
                 Include(r => r.Country).
                 AsNoTracking().
-                Where(r => r.Country.RegionId == regionId).
+                Where(r => r.CountryId == countryId).
                 ToList();
         }
 

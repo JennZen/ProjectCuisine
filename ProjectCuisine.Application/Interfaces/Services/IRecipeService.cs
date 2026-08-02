@@ -11,7 +11,7 @@ namespace ProjectCuisine.Application.Interfaces.Services
     {
         public List<RecipeListDto> GetAll();
 
-        public List<RecipeListDto> GetByRegion(int regionId);
+        public List<RecipeListDto> GetByCountryId(int countryId);
 
         public RecipeDetailsDto? GetById(int id);
 

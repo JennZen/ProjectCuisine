@@ -51,9 +51,9 @@ namespace ProjectCuisine.Application.Services
             return _mapper.ToListDtos(recipes);
         }
 
-        public List<RecipeListDto> GetByRegion(int regionId)
+        public List<RecipeListDto> GetByCountryId(int countryId)
         {
-            var recipes = _repository.GetByRegion(regionId);
+            var recipes = _repository.GetByCountryId(countryId);
             return _mapper.ToListDtos(recipes);
         }
 

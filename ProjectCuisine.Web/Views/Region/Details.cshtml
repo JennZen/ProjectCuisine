@@ -4,19 +4,63 @@
     ViewData["Title"] = $"Details for {Model.Region.Name}";
 }
 
-<h1>Explore countries of @Model.Region.Name</h1>
-
-<h2>Countries</h2>
-<div class="row">
-    @foreach(var country in Model.Countries)
-    {
-        <div class="card" style="width:200px; height:170px">
-            <div class="card-body">
-                <h4 class="card-title">@country.Name</h4>
-                <a href="#"></a>
-            </div>
-            <img class="card-img-bottom rounded" src="@country.FlagUrl" alt="@country.Name" style="width:100%; height:95px; object-fit:cover;">
-        </div>
+<style>
+    .country-card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
     }
+
+    .country-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+     .country-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+     }
+</style>
+
+<div class="p-4 mb-4 bg-primary text-white text-center rounded-3 shadow-sm">
+    <h1 class="fw-bold m-0">Explore countries of @Model.Region.Name</h1>
 </div>
 
+<nav class="mb-3" aria-label="breadcrumb">
+    <a asp-controller="Region" asp-action="Index" class="btn btn-sm btn-outline-secondary rounded-pill">
+        <h5>← Back to Regions</h5>
+    </a>
+</nav>
+
+@if (!Model.Countries.Any())
+{
+    <div class="alert alert-info text-center p-4 rounded-3 shadow-sm my-4">
+        <h4 class="alert-heading fw-bold mb-2">No countries found</h4>
+        <p class="m-0">There are no countries added to this region yet.</p>
+    </div>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var country in Model.Countries)
+        {
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <a asp-controller="Country"
+                   asp-action="Details"
+                   asp-route-countryId="@country.Id"
+                   class="country-card-link h-100">
+
+                    <div class="card h-100 border-0 shadow-sm country-card overflow-hidden">
+                        <img class="card-img-top"
+                             src="@country.FlagUrl"
+                             alt="@country.Name"
+                             style="height: 110px; object-fit: cover;">
+
+                        <div class="card-body p-2 text-center d-flex align-items-center justify-content-center">
+                            <h6 class="card-title fw-bold m-0 text-truncate">@country.Name</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+}

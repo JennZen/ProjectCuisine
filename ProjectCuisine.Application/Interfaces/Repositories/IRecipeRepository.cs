@@ -15,7 +15,7 @@ namespace ProjectCuisine.Application.Interfaces.Repositories
 
         public Recipe? GetByName(string name);
 
-        public List<Recipe> GetByRegion(int regionId);
+        public List<Recipe> GetByCountryId(int countryId);
 
         public void Add(Recipe recipe);
 
