@@ -22,21 +22,21 @@ namespace ProjectCuisine.Application.Services
             _mapper = mapper;
         }
 
-        public List<RecipeListDto> GetFavorites(string userId)
+        public async Task<List<RecipeListDto>> GetFavorites(string userId)
         {
-            var favoriteRecipes = _repository.GetFavorites(userId);
+            var favoriteRecipes = await _repository.GetFavoritesAsync(userId);
             return _mapper.ToListDtos(favoriteRecipes);
         }
 
-        public void Toggle(string userId, int recipeId)
+        public async Task Toggle(string userId, int recipeId)
         {
-            if (_repository.IsFavorite(userId, recipeId))
+            if (await _repository.IsFavoriteAsync(userId, recipeId))
             {
-                _repository.Remove(userId, recipeId);
+                await _repository.RemoveAsync(userId, recipeId);
             }
             else
             {
-                _repository.Add(userId, recipeId);
+                await _repository.AddAsync(userId, recipeId);
             }
         }
     }

@@ -9,18 +9,18 @@ namespace ProjectCuisine.Application.Interfaces.Repositories
 {
     public interface IRecipeRepository
     {
-        public List<Recipe> GetAll();
+        public Task<List<Recipe>> GetAllAsync();
 
-        public Recipe? GetById(int id);
+        public Task<Recipe?> GetByIdAsync(int id);
 
-        public Recipe? GetByName(string name);
+        public Task<Recipe?> GetByNameAsync(string name);
 
-        public List<Recipe> GetByCountryId(int countryId);
+        public Task<List<Recipe>> GetByCountryIdAsync(int countryId);
 
-        public void Add(Recipe recipe);
+        public Task AddAsync(Recipe recipe);
 
-        public void Update(Recipe recipe);
+        public Task UpdateAsync(Recipe recipe);
 
-        public void Delete(Recipe recipe);
+        public Task DeleteAsync(Recipe recipe);
     }
 }

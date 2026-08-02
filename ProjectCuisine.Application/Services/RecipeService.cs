@@ -23,43 +23,43 @@ namespace ProjectCuisine.Application.Services
             _mapper = mapper;
         }
 
-        public void Create(RecipeCreateDto recipeDto)
+        public async Task CreateAsync(RecipeCreateDto recipeDto)
         {
-            var foundRecipe = _repository.GetByName(recipeDto.Name);
+            var foundRecipe = await _repository.GetByNameAsync(recipeDto.Name);
 
             if(foundRecipe == null)
             {
                 var recipeEntity = _mapper.ToEntity(recipeDto);
-                _repository.Add(recipeEntity);
+                await _repository.AddAsync(recipeEntity);
             }
         }
 
-        public void Update(RecipeUpdateDto recipeDto)
+        public async Task UpdateAsync(RecipeUpdateDto recipeDto)
         {
-            var foundRecipe = _repository.GetById(recipeDto.Id);
+            var foundRecipe = await _repository.GetByIdAsync(recipeDto.Id);
 
             if (foundRecipe != null)
             {
                 _mapper.UpdateEntity(recipeDto, foundRecipe);
-                _repository.Update(foundRecipe);
+                await _repository.UpdateAsync(foundRecipe);
             }
         }
 
-        public List<RecipeListDto> GetAll()
+        public async Task<List<RecipeListDto>> GetAllAsync()
         {
-            var recipes = _repository.GetAll();
+            var recipes = await _repository.GetAllAsync();
             return _mapper.ToListDtos(recipes);
         }
 
-        public List<RecipeListDto> GetByCountryId(int countryId)
+        public async Task<List<RecipeListDto>> GetByCountryIdAsync(int countryId)
         {
-            var recipes = _repository.GetByCountryId(countryId);
+            var recipes = await _repository.GetByCountryIdAsync(countryId);
             return _mapper.ToListDtos(recipes);
         }
 
-        public RecipeDetailsDto? GetById(int id)
+        public async Task<RecipeDetailsDto?> GetByIdAsync(int id)
         {
-            var recipe = _repository.GetById(id);
+            var recipe = await _repository.GetByIdAsync(id);
             if (recipe == null)
             {
                 return null;
@@ -67,12 +67,12 @@ namespace ProjectCuisine.Application.Services
             return _mapper.ToDetailsDto(recipe);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var recipe = _repository.GetById(id);
+            var recipe = await _repository.GetByIdAsync(id);
             if (recipe != null)
             {
-                _repository.Delete(recipe);
+                await _repository.DeleteAsync(recipe);
             }
         }
 

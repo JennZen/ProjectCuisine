@@ -9,7 +9,8 @@ namespace ProjectCuisine.Application.Interfaces.Repositories
 {
     public interface IRegionRepository
     {
-        public List<Region> GetAll();
-        public Region GetById(int id);
+        public Task<List<Region>> GetAllAsync();
+
+        public Task<Region> GetByIdAsync(int id);
     }
 }

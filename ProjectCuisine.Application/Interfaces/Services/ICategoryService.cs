@@ -9,6 +9,6 @@ namespace ProjectCuisine.Application.Interfaces.Services
 {
     public interface ICategoryService
     {
-        List<CategoryDto> GetAll();
+        Task<List<CategoryDto>> GetAll();
     }
 }

@@ -22,9 +22,9 @@ namespace ProjectCuisine.Application.Services
             _mapper = mapper;
         }
 
-        public List<CategoryDto> GetAll()
+        public async Task<List<CategoryDto>> GetAll()
         {
-            var categories = _repository.GetAll();
+            var categories = await _repository.GetAllAsync();
             return _mapper.ToDtos(categories);
         }
     }

@@ -22,14 +22,14 @@ namespace ProjectCuisine.Application.Services
             _mapper = mapper;
         }
 
-        public List<RegionListDto> GetAll()
+        public async Task<List<RegionListDto>> GetAllAsync()
         {
-            var regions = _repository.GetAll();
+            var regions = await _repository.GetAllAsync();
             return _mapper.ToListDtos(regions);
         }
-        public RegionPageDto GetById(int id)
+        public async Task<RegionPageDto> GetByIdAsync(int id)
         {
-            var region = _repository.GetById(id);
+            var region = await _repository.GetByIdAsync(id);
             return _mapper.ToPageDto(region);
         }
     }

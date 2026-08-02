@@ -9,12 +9,11 @@ namespace ProjectCuisine.Application.Interfaces.Repositories
 {
     public interface IFavoriteRecipeRepository
     {
-        public bool IsFavorite(string userId, int recipeId);
+        public Task<bool> IsFavoriteAsync(string userId, int recipeId);
 
-        public void Add(string userId, int recipeId);
+        public Task AddAsync(string userId, int recipeId);
 
-        public void Remove(string userId, int recipeId);
-
-        public List<Recipe> GetFavorites(string userId);
+        public Task RemoveAsync(string userId, int recipeId);
+        public Task<List<Recipe>> GetFavoritesAsync(string userId);
     }
 }

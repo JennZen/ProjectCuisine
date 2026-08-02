@@ -10,8 +10,8 @@ namespace ProjectCuisine.Application.Interfaces.Services
 {
     public interface IFavoriteRecipeService
     {
-        public List<RecipeListDto> GetFavorites(string userId);
+        public Task<List<RecipeListDto>> GetFavorites(string userId);
 
-        public void Toggle(string userId, int recipeId);
+        public Task Toggle(string userId, int recipeId);
     }
 }

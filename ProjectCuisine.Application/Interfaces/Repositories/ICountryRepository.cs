@@ -9,9 +9,9 @@ namespace ProjectCuisine.Application.Interfaces.Repositories
 {
     public interface ICountryRepository
     {
-        public List<Country> GetAll();
+        public Task<List<Country>> GetAllAsync();
 
-        public Country GetById(int id);
+        public Task<Country?> GetByIdAsync(int id);
 
         public Task<List<Country>> GetAllByRegionAsync(int regionId);
     }

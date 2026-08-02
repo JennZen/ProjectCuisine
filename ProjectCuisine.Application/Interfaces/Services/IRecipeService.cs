@@ -9,16 +9,16 @@ namespace ProjectCuisine.Application.Interfaces.Services
 {
     public interface IRecipeService
     {
-        public List<RecipeListDto> GetAll();
+        public Task<List<RecipeListDto>> GetAllAsync();
 
-        public List<RecipeListDto> GetByCountryId(int countryId);
+        public Task<List<RecipeListDto>> GetByCountryIdAsync(int countryId);
 
-        public RecipeDetailsDto? GetById(int id);
+        public Task<RecipeDetailsDto?> GetByIdAsync(int id);
 
-        public void Update(RecipeUpdateDto recipeDto);
+        public Task UpdateAsync(RecipeUpdateDto recipeDto);
 
-        public void Delete(int id);
+        public Task DeleteAsync(int id);
 
-        public void Create(RecipeCreateDto recipeCreateDto);
+        public Task CreateAsync(RecipeCreateDto recipeCreateDto);
     }
 }

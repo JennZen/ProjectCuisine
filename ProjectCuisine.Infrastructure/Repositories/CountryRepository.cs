@@ -19,14 +19,14 @@ namespace ProjectCuisine.Infrastructure.Repositories
             _context = context;
         }
 
-        public List<Country> GetAll()
+        public async Task<List<Country>> GetAllAsync()
         {
-            return _context.Countries.AsNoTracking().ToList();
+            return await _context.Countries.AsNoTracking().ToListAsync();
         }
 
-        public Country GetById(int id)
+        public async Task<Country?> GetByIdAsync(int id)
         {
-            return _context.Countries.AsNoTracking().FirstOrDefault(c => c.Id == id);
+            return await _context.Countries.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<List<Country>> GetAllByRegionAsync(int regionId)

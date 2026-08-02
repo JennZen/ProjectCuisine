@@ -19,14 +19,14 @@ namespace ProjectCuisine.Infrastructure.Repositories
             _context = context;
         }
 
-        public List<Region> GetAll()
+        public async Task<List<Region>> GetAllAsync()
         {
-            return _context.Regions.Include(r => r.Countries).AsNoTracking().ToList();
+            return await _context.Regions.Include(r => r.Countries).AsNoTracking().ToListAsync();
         }
 
-        public Region GetById(int id)
+        public async Task<Region> GetByIdAsync(int id)
         {
-            return _context.Regions.Include(r => r.Countries).FirstOrDefault(r => r.Id == id);
+            return await _context.Regions.Include(r => r.Countries).FirstOrDefaultAsync(r => r.Id == id);
         }
     }
 }

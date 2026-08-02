@@ -23,15 +23,15 @@ namespace ProjectCuisine.Application.Services
             _mapper = mapper;
         }
 
-        public CountryPageDto GetById(int id)
+        public async Task<CountryPageDto?> GetByIdAsync(int id)
         {
-            var country = _repository.GetById(id);
+            var country = await _repository.GetByIdAsync(id);
             return _mapper.ToPageDto(country);
         }
 
-        public List<CountryListDto> GetAll()
+        public async Task<List<CountryListDto>> GetAllAsync()
         {
-            var countries = _repository.GetAll();
+            var countries = await _repository.GetAllAsync();
             return _mapper.ToListDtos(countries);
         }
 

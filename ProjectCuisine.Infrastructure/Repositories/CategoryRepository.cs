@@ -19,9 +19,9 @@ namespace ProjectCuisine.Infrastructure.Repositories
             _context = context;
         }
 
-        public List<Category> GetAll()
+        public async Task<List<Category>> GetAllAsync()
         {
-            return _context.Categories.AsNoTracking().ToList();
+            return await _context.Categories.AsNoTracking().ToListAsync();
         }
     }
 }

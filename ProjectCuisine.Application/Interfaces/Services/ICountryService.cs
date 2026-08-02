@@ -9,9 +9,9 @@ namespace ProjectCuisine.Application.Interfaces.Services
 {
     public interface ICountryService
     {
-        public CountryPageDto GetById(int id);
+        public Task<CountryPageDto?> GetByIdAsync(int id);
 
-        public List<CountryListDto> GetAll();
+        public Task<List<CountryListDto>> GetAllAsync();
 
         public Task<List<CountryListDto>> GetAllByRegionAsync(int regionId);
     }

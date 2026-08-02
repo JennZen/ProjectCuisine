@@ -19,38 +19,38 @@ namespace ProjectCuisine.Infrastructure.Repositories
             _context = context;
         }
 
-        public bool IsFavorite(string userId, int recipeId)
+        public async Task<bool> IsFavoriteAsync(string userId, int recipeId)
         {
-            return _context.FavoriteRecipes.Any(f => f.UserId == userId && f.RecipeId == recipeId);
+            return await _context.FavoriteRecipes.AnyAsync(f => f.UserId == userId && f.RecipeId == recipeId);
         }
 
-        public void Add(string userId, int recipeId)
+        public async Task AddAsync(string userId, int recipeId)
         {
-            if (IsFavorite(userId, recipeId)) return;
+            if (await IsFavoriteAsync(userId, recipeId)) return;
 
-            _context.FavoriteRecipes.Add(new FavoriteRecipe { UserId = userId, RecipeId = recipeId });
-            _context.SaveChanges();
+            await _context.FavoriteRecipes.AddAsync(new FavoriteRecipe { UserId = userId, RecipeId = recipeId });
+            await _context.SaveChangesAsync();
         }
 
-        public void Remove(string userId, int recipeId)
+        public async Task RemoveAsync(string userId, int recipeId)
         {
-            var favoriteRecipe = _context.FavoriteRecipes.FirstOrDefault(f => f.UserId == userId && f.RecipeId == recipeId);
+            var favoriteRecipe = await _context.FavoriteRecipes.FirstOrDefaultAsync(f => f.UserId == userId && f.RecipeId == recipeId);
 
             if (favoriteRecipe != null)
             {
                 _context.FavoriteRecipes.Remove(favoriteRecipe);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
-        public List<Recipe> GetFavorites(string userId)
+        public async Task<List<Recipe>> GetFavoritesAsync(string userId)
         {
-            return _context.FavoriteRecipes.Where(f => f.UserId == userId)
+            return await _context.FavoriteRecipes.Where(f => f.UserId == userId)
                            .Include(f => f.Recipe).ThenInclude(r => r.Category)
                            .Include(f => f.Recipe).ThenInclude(r => r.Country)
                            .Select(f => f.Recipe)
                            .AsNoTracking()
-                           .ToList();
+                           .ToListAsync();
         }
     }
 }

@@ -18,59 +18,60 @@ namespace ProjectCuisine.Infrastructure.Repositories
         { 
             _context = context;
         }
-        public void Add(Recipe recipe)
+        public async Task AddAsync(Recipe recipe)
         {
-            _context.Recipes.Add(recipe);
-            _context.SaveChanges();
+            await _context.Recipes.AddAsync(recipe);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(Recipe recipe)
+        public async Task DeleteAsync(Recipe recipe)
         {
             _context.Recipes.Remove(recipe);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-       
-        public List<Recipe> GetAll()
+
+        public async Task<List<Recipe>> GetAllAsync()
         {
-            return _context.Recipes.
+            return await _context.Recipes.
                 Include(r => r.Category).
                 Include(r => r.Country).
                 AsNoTracking().
-                ToList();
+                ToListAsync();
         }
 
-        public List<Recipe> GetByCountryId(int countryId)
+        public async Task<List<Recipe>> GetByCountryIdAsync(int countryId)
         {
-            return _context.Recipes.
+            return await _context.Recipes.
                 Include(r => r.Category).
                 Include(r => r.Country).
                 AsNoTracking().
                 Where(r => r.CountryId == countryId).
-                ToList();
+                ToListAsync();
         }
 
-        public Recipe? GetById(int id)
+
+        public async Task<Recipe?> GetByIdAsync(int id)
         {
-            return _context.Recipes.
+            return await _context.Recipes.
                 Include(r => r.Category).
                 Include(r => r.Country).
                 AsNoTracking()
-                .FirstOrDefault(r => r.Id == id);
+                .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public Recipe? GetByName(string name)
+        public async Task<Recipe?> GetByNameAsync(string name)
         {
-            return _context.Recipes.
+            return await _context.Recipes.
                 Include(r => r.Category).
                 Include(r => r.Country).
                 AsNoTracking()
-                .FirstOrDefault(r => r.Name == name);
+                .FirstOrDefaultAsync(r => r.Name == name);
         }
 
-        public void Update(Recipe recipe)
+        public async Task UpdateAsync(Recipe recipe)
         {
             _context.Recipes.Update(recipe);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

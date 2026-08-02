@@ -9,6 +9,6 @@ namespace ProjectCuisine.Application.Interfaces.Repositories
 {
     public interface ICategoryRepository
     {
-        public List<Category> GetAll();
+        public Task<List<Category>> GetAllAsync();
     }
 }
