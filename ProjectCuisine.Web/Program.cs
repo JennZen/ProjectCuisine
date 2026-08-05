@@ -33,7 +33,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
-
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
@@ -60,7 +59,7 @@ if (!app.Environment.IsDevelopment())
 
 var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<ProjectCuisineDbContext>();
 context.Database.Migrate();
-DbSeeder.Seed(context);
+await DbSeeder.SeedAsync(context);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
