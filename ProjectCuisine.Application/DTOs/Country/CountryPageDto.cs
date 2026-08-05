@@ -16,6 +16,8 @@ namespace ProjectCuisine.Application.DTOs.Country
 
         public string FlagUrl { get; set; } = string.Empty;
 
+        public int RegionId { get; set; }
+
         public List<RecipeListDto> Recipes { get; set; } = new List<RecipeListDto>();
     }
 }

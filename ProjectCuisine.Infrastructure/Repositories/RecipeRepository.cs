@@ -18,6 +18,7 @@ namespace ProjectCuisine.Infrastructure.Repositories
         { 
             _context = context;
         }
+
         public async Task AddAsync(Recipe recipe)
         {
             await _context.Recipes.AddAsync(recipe);

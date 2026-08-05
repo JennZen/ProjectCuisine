@@ -14,14 +14,15 @@ namespace ProjectCuisine.Web.Controllers
             _recipeService = recipeService;
         }
 
-        public async Task<IActionResult> Details(int countryId)
+        public async Task<IActionResult> Details(int id)
         {
-            var country = await _countryService.GetByIdAsync(countryId);
+            var country = await _countryService.GetByIdAsync(id);
             if(country == null) return NotFound();
 
-            var recipes = await _recipeService.GetByCountryIdAsync(countryId);
+            var recipes = await _recipeService.GetByCountryIdAsync(id);
 
             ViewBag.CountryName = country.Name;
+            ViewBag.RegionId = country.RegionId;
 
             return View(recipes);
         }

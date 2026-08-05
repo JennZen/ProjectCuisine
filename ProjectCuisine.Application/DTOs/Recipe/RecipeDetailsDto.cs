@@ -22,6 +22,6 @@ namespace ProjectCuisine.Application.DTOs.Recipe
 
         public string CountryName { get; set; } = string.Empty;
 
-        //public bool IsFavorite { get; set; }
+        public int CountryId { get; set; }
     }
 }
