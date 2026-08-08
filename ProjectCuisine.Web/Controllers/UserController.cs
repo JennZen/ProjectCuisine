@@ -45,8 +45,8 @@ namespace ProjectCuisine.Web.Controllers
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if(!result.Succeeded)
-            {                 
+            if (!result.Succeeded)
+            {
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -55,7 +55,7 @@ namespace ProjectCuisine.Web.Controllers
             }
 
             await _signInManager.SignInAsync(user, isPersistent: false);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Region");
         }
 
         [HttpGet]
@@ -64,13 +64,31 @@ namespace ProjectCuisine.Web.Controllers
             return View();
         }
 
-        /*public IActionResult Login(LoginDto loginDto)
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            
-        }*/
+            if (!ModelState.IsValid)
+            {
+                return View(loginDto);
+            }
 
-        /*public IActionResult Logout()
-        {/*/
+            var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
 
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid email or password");
+                return View(loginDto);
+            }
+
+            return RedirectToAction("Index", "Region");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Region");
+        }
     }
 }

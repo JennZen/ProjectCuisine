@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProjectCuisine.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProjectCuisine.Infrastructure.Data
 {
-    public class ProjectCuisineDbContext : DbContext
+    public class ProjectCuisineDbContext : IdentityDbContext<User>
     {
         public ProjectCuisineDbContext(
             DbContextOptions<ProjectCuisineDbContext> options) : base(options)
@@ -24,8 +25,6 @@ namespace ProjectCuisine.Infrastructure.Data
         public DbSet<Country> Countries { get; set; }
 
         public DbSet<FavoriteRecipe> FavoriteRecipes { get; set; }
-
-        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
