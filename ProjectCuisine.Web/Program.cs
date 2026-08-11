@@ -29,8 +29,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Account/Login";
-    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.LoginPath = "/User/Login";
 });
 
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
@@ -41,6 +40,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<IRegionService, RegionService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<IFavoriteRecipeRepository, FavoriteRecipeRepository>();
+builder.Services.AddScoped<IFavoriteRecipeService, FavoriteRecipeService>();
 
 builder.Services.AddSingleton<CategoryMapper>();
 builder.Services.AddSingleton<CountryMapper>();

@@ -9,12 +9,7 @@ namespace ProjectCuisine.Infrastructure.Data
     {
         public async static Task SeedAsync(ProjectCuisineDbContext context)
         {
-            if (context.Recipes.Any()) context.Recipes.RemoveRange(context.Recipes);
-            if (context.Categories.Any()) context.Categories.RemoveRange(context.Categories);
-            if (context.Countries.Any()) context.Countries.RemoveRange(context.Countries);
-            if (context.Regions.Any()) context.Regions.RemoveRange(context.Regions);
-
-            await context.SaveChangesAsync();
+            if (context.Regions.Any()) return;
 
             // 1. Regions
             var oceania = new Region { Name = "Oceania", ImageUrl = "https://www.virtualoceania.net/oceania/maps/globe.gif" };

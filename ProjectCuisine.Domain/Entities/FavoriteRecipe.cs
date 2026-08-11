@@ -10,11 +10,11 @@ namespace ProjectCuisine.Domain.Entities
     {
         public string UserId { get; set; } = string.Empty;
 
-        public User User { get; set; } = new User();
+        public User User { get; set; }
 
         public int RecipeId { get; set; }
 
-        public Recipe Recipe { get; set; } = new Recipe();
+        public Recipe Recipe { get; set; }
 
     }
 }
