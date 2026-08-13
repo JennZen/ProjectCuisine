@@ -8,10 +8,25 @@ namespace ProjectCuisine.Web.Controllers
     {
 
         private readonly IRecipeService _recipeService;
+        private readonly ICountryService _countryService;
 
-        public RecipeController(IRecipeService recipeService)
+
+        public RecipeController(IRecipeService recipeService, ICountryService countryService)
         {
             _recipeService = recipeService;
+            _countryService = countryService;
+        }
+
+        public async Task<IActionResult> Index(int id) //id is the countryId
+        {
+            var country = await _countryService.GetByIdAsync(id);
+            if (country == null) return NotFound();
+
+            var recipes = await _recipeService.GetByCountryIdAsync(id);
+
+            ViewBag.CountryName = country.Name;
+            ViewBag.RegionId = country.RegionId;
+            return View(recipes);
         }
 
         public async Task<IActionResult> Details(int id)

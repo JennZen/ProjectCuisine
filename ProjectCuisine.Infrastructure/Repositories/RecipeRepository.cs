@@ -69,6 +69,16 @@ namespace ProjectCuisine.Infrastructure.Repositories
                 .FirstOrDefaultAsync(r => r.Name == name);
         }
 
+        public async Task<List<Recipe>> GetByCategoryIdAsync(int categoryId)
+        {
+            return await _context.Recipes.
+                Include(r => r.Category).
+                Include(r => r.Country).
+                AsNoTracking().
+                Where(r => r.CategoryId == categoryId).
+                ToListAsync();
+        }
+
         public async Task UpdateAsync(Recipe recipe)
         {
             _context.Recipes.Update(recipe);

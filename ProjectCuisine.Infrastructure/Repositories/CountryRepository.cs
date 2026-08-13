@@ -27,14 +27,20 @@ namespace ProjectCuisine.Infrastructure.Repositories
 
         public async Task<Country?> GetByIdAsync(int id)
         {
-            return await _context.Countries.Include(c => c.Region).
-                        Include(c => c.Recipes).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Countries
+                .Include(c => c.Region)
+                .Include(c => c.Recipes)
+                    .ThenInclude(r => r.Category)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<List<Country>> GetAllByRegionAsync(int regionId)
         {
-            return await _context.Countries.Include(c => c.Region).
-                        Include(c => c.Recipes).AsNoTracking().Where(c => c.RegionId == regionId).ToListAsync();
+            return await _context.Countries.
+                        Include(c => c.Region).
+                        Include(c => c.Recipes).ThenInclude(r => r.Category).
+                        AsNoTracking().Where(c => c.RegionId == regionId).ToListAsync();
         }
     }
 }

@@ -1,30 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectCuisine.Application.Interfaces.Services;
+using ProjectCuisine.Application.Services;
 
 namespace ProjectCuisine.Web.Controllers
 {
     public class CountryController : Controller
     {
         private readonly ICountryService _countryService;
-        private readonly IRecipeService _recipeService;
+        private readonly IRegionService _regionService;
 
-        public CountryController(ICountryService countryService, IRecipeService recipeService)
+        public CountryController(ICountryService countryService, IRegionService regionService)
         {
             _countryService = countryService;
-            _recipeService = recipeService;
+            _regionService = regionService;
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Index(int id)  //id is the regionId
         {
-            var country = await _countryService.GetByIdAsync(id);
-            if(country == null) return NotFound();
+            var region = await _regionService.GetByIdAsync(id);
 
-            var recipes = await _recipeService.GetByCountryIdAsync(id);
+            if (region == null) return NotFound();
 
-            ViewBag.CountryName = country.Name;
-            ViewBag.RegionId = country.RegionId;
-
-            return View(recipes);
+            var countries = await _countryService.GetAllByRegionAsync(id);
+            ViewBag.Region = region;
+            return View(countries);
         }
     }
 }

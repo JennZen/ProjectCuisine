@@ -20,10 +20,10 @@ namespace ProjectCuisine.Domain.Entities
 
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; } = new Category();
+        public Category Category { get; set; }
 
         public int CountryId { get; set; }
 
-        public Country Country { get; set; } = new Country();
+        public Country Country { get; set; }
     }
 }

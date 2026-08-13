@@ -1,7 +1,7 @@
-﻿@model (ProjectCuisine.Application.DTOs.Region.RegionPageDto Region, List<ProjectCuisine.Application.DTOs.Country.CountryListDto> Countries)
+﻿@model List<ProjectCuisine.Application.DTOs.Country.CountryListDto>
 
 @{
-    ViewData["Title"] = $"Details for {Model.Region.Name}";
+    ViewData["Title"] = $"Details for {ViewBag.Region.Name}";
 }
 
 <style>
@@ -15,14 +15,14 @@
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-     .country-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
-     }
+        .country-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+        }
 </style>
 
 <div class="p-4 mb-4 bg-primary text-white text-center rounded-3 shadow-sm">
-    <h1 class="fw-bold m-0">Explore countries of @Model.Region.Name</h1>
+    <h1 class="fw-bold m-0">Explore countries of @ViewBag.Region.Name</h1>
 </div>
 
 <nav class="mb-3" aria-label="breadcrumb">
@@ -31,7 +31,7 @@
     </a>
 </nav>
 
-@if (!Model.Countries.Any())
+@if (!Model.Any())
 {
     <div class="alert alert-info text-center p-4 rounded-3 shadow-sm my-4">
         <h4 class="alert-heading fw-bold mb-2">No countries found</h4>
@@ -41,11 +41,11 @@
 else
 {
     <div class="row g-3">
-        @foreach (var country in Model.Countries)
+        @foreach (var country in Model)
         {
             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                <a asp-controller="Country"
-                   asp-action="Details"
+                <a asp-controller="Recipe"
+                   asp-action="Index"
                    asp-route-id="@country.Id"
                    class="country-card-link h-100">
 

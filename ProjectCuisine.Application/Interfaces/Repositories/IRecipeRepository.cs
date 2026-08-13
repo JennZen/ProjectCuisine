@@ -17,6 +17,8 @@ namespace ProjectCuisine.Application.Interfaces.Repositories
 
         public Task<List<Recipe>> GetByCountryIdAsync(int countryId);
 
+        public Task<List<Recipe>> GetByCategoryIdAsync(int categoryId);
+
         public Task AddAsync(Recipe recipe);
 
         public Task UpdateAsync(Recipe recipe);

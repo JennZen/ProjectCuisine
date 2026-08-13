@@ -24,7 +24,7 @@
     {
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card h-100 border-0 shadow-sm region-card overflow-hidden">
-                <a asp-controller="Region" asp-action="Details" asp-route-id="@region.Id">
+                <a asp-controller="Country" asp-action="Index" asp-route-id="@region.Id">
                     <img class="card-img-top"
                          src="@region.ImageUrl"
                          alt="@region.Name"
@@ -34,8 +34,8 @@
                 <div class="card-body d-flex flex-column justify-content-between p-3">
                     <h4 class="card-title fw-bold text-dark mb-3">@region.Name</h4>
 
-                    <a asp-controller="Region"
-                       asp-action="Details"
+                    <a asp-controller="Country"
+                       asp-action="Index"
                        asp-route-id="@region.Id"
                        class="btn btn-primary w-100 fw-semibold">
                         Details

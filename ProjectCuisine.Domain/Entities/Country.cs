@@ -16,7 +16,7 @@ namespace ProjectCuisine.Domain.Entities
 
         public int RegionId { get; set; }
 
-        public Region Region { get; set; } = new Region();
+        public Region Region { get; set; }
 
         public List<Recipe> Recipes { get; set; } = new List<Recipe>();
 

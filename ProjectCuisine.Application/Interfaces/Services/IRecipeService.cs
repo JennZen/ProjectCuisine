@@ -15,6 +15,8 @@ namespace ProjectCuisine.Application.Interfaces.Services
 
         public Task<RecipeDetailsDto?> GetByIdAsync(int id);
 
+        public Task<List<RecipeListDto>> GetByCategoryIdAsync(int categoryId);
+
         public Task UpdateAsync(RecipeUpdateDto recipeDto);
 
         public Task DeleteAsync(int id);
