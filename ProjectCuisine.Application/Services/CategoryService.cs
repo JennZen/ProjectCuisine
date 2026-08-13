@@ -22,7 +22,7 @@ namespace ProjectCuisine.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<List<CategoryDto>> GetAll()
+        public async Task<List<CategoryDto>> GetAllAsync()
         {
             var categories = await _repository.GetAllAsync();
             return _mapper.ToDtos(categories);

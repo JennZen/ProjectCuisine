@@ -67,9 +67,9 @@ namespace ProjectCuisine.Application.Services
             return _mapper.ToDetailsDto(recipe);
         }
 
-        public async Task<List<RecipeListDto>> GetByCategoryIdAsync(int categoryId)
+        public async Task<List<RecipeListDto>> GetByCategoryAndCountryAsync(int categoryId, int countryId)
         {
-            var recipes = await _repository.GetByCategoryIdAsync(categoryId);
+            var recipes = await _repository.GetByCategoryAndCountryAsync(categoryId, countryId);
             return _mapper.ToListDtos(recipes);
         }
 

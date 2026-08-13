@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjectCuisine.Application.DTOs.Recipe;
 using ProjectCuisine.Application.Interfaces.Services;
 
@@ -8,22 +9,31 @@ namespace ProjectCuisine.Web.Controllers
     {
 
         private readonly IRecipeService _recipeService;
+
         private readonly ICountryService _countryService;
 
+        private readonly ICategoryService _categoryService;
 
-        public RecipeController(IRecipeService recipeService, ICountryService countryService)
+        public RecipeController(IRecipeService recipeService, ICountryService countryService, ICategoryService categoryService)
         {
             _recipeService = recipeService;
             _countryService = countryService;
+            _categoryService = categoryService;
         }
 
-        public async Task<IActionResult> Index(int id) //id is the countryId
+        public async Task<IActionResult> Index(int id, int? categoryId) //id is the countryId
         {
             var country = await _countryService.GetByIdAsync(id);
             if (country == null) return NotFound();
 
-            var recipes = await _recipeService.GetByCountryIdAsync(id);
+            var recipes = categoryId.HasValue && categoryId.Value > 0
+                ? await _recipeService.GetByCategoryAndCountryAsync(categoryId.Value, id)
+                : await _recipeService.GetByCountryIdAsync(id);
 
+            var categories = await _categoryService.GetAllAsync();
+
+            ViewBag.Categories = new SelectList(categories, "Id", "Name", categoryId);
+            ViewBag.CountryId = id;
             ViewBag.CountryName = country.Name;
             ViewBag.RegionId = country.RegionId;
             return View(recipes);
