@@ -12,5 +12,7 @@ namespace ProjectCuisine.Application.Interfaces.Services
         public Task<List<RegionListDto>> GetAllAsync();
 
         public Task<RegionPageDto> GetByIdAsync(int id);
+
+        public Task<int> GetCountAsync();
     }
 }

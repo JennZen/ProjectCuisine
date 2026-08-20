@@ -1,0 +1,59 @@
+﻿@model ProjectCuisine.Web.Models.Admin.DashboardViewModel
+@{
+	ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="p-4 mb-4 bg-primary text-white text-center rounded-3">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<div class="mb-3" aria-label="breadcrumb">
+    <a asp-area="" asp-controller="Region" asp-action="Index" class="btn btn-primary">
+        <h5>← Back Home</h5>
+    </a>
+</div>
+
+<div class="row row-cols-2 mb-4">
+    <div class="col">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Recipes:</h5>
+                <p class="display-6 fw-bold text-primary">@Model.TotalRecipes</p>
+                <a asp-area="Admin" asp-controller="Recipe" asp-action="Index" class="btn btn-outline-primary">Details</a>
+			</div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Countries:</h5>
+                <p class="display-6 fw-bold text-primary">@Model.TotalCountries</p>
+                <a asp-area="Admin" asp-controller="Country" asp-action="Index" class="btn btn-outline-primary">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-2">
+    <div class="col">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Regions:</h5>
+                <p class="display-6 fw-bold text-primary">@Model.TotalRegions</p>
+                <a asp-area="Admin" asp-controller="Region" asp-action="Index" class="btn btn-outline-primary">Details</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Users:</h5>
+                <p class="display-6 fw-bold text-primary">@Model.TotalUsers</p>
+                <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-outline-primary">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+

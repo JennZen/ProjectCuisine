@@ -32,5 +32,10 @@ namespace ProjectCuisine.Application.Services
             var region = await _repository.GetByIdAsync(id);
             return _mapper.ToPageDto(region);
         }
+
+        public async Task<int> GetCountAsync()
+        {
+            return await _repository.GetCountAsync();
+        }
     }
 }

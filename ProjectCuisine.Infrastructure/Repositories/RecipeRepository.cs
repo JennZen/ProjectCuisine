@@ -79,6 +79,11 @@ namespace ProjectCuisine.Infrastructure.Repositories
                 ToListAsync();
         }
 
+        public async Task<int> GetCountAsync()
+        {
+            return await _context.Recipes.CountAsync();
+        }
+
         public async Task UpdateAsync(Recipe recipe)
         {
             _context.Recipes.Update(recipe);

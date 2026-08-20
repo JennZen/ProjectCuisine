@@ -14,5 +14,7 @@ namespace ProjectCuisine.Application.Interfaces.Repositories
         public Task<Country?> GetByIdAsync(int id);
 
         public Task<List<Country>> GetAllByRegionAsync(int regionId);
+
+        public Task<int> GetCountAsync();
     }
 }

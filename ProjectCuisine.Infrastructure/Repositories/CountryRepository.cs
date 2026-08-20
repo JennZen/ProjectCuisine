@@ -42,5 +42,10 @@ namespace ProjectCuisine.Infrastructure.Repositories
                         Include(c => c.Recipes).ThenInclude(r => r.Category).
                         AsNoTracking().Where(c => c.RegionId == regionId).ToListAsync();
         }
+
+        public async Task<int> GetCountAsync()
+        {
+            return await _context.Countries.CountAsync();
+        }
     }
 }

@@ -40,5 +40,10 @@ namespace ProjectCuisine.Application.Services
             var countries = await _repository.GetAllByRegionAsync(regionId);
             return _mapper.ToListDtos(countries);
         }
+
+        public async Task<int> GetCountAsync()
+        {
+            return await _repository.GetCountAsync();
+        }
     }
 }

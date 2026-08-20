@@ -12,5 +12,7 @@ namespace ProjectCuisine.Application.Interfaces.Repositories
         public Task<List<Region>> GetAllAsync();
 
         public Task<Region> GetByIdAsync(int id);
+
+        public Task<int> GetCountAsync();
     }
 }

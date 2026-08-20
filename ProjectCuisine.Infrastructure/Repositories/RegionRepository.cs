@@ -28,5 +28,10 @@ namespace ProjectCuisine.Infrastructure.Repositories
         {
             return await _context.Regions.Include(r => r.Countries).FirstOrDefaultAsync(r => r.Id == id);
         }
+
+        public async Task<int> GetCountAsync()
+        {
+            return await _context.Regions.CountAsync();
+        }
     }
 }
