@@ -1,0 +1,59 @@
+﻿@model List<ProjectCuisine.Application.DTOs.Region.RegionListDto>
+
+@{
+    ViewData["Title"] = "Regions";
+}
+
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0 text-dark">Regions Management</h2>
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+            &larr; Back to Dashboard
+        </a>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info text-center shadow-sm" role="alert">
+            <h5 class="mb-0">No regions available!</h5>
+            <p class="mb-0 text-muted">Try adding some regions to your database.</p>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="ps-4">Region Name</th>
+                                <th scope="col">Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var region in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4 fw-bold">@region.Name</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(region.ImageUrl))
+                                        {
+                                            <img src="@region.ImageUrl" alt="@region.Name"
+                                                 class="img-thumbnail rounded"
+                                                 style="height: 80px; width: 80px; object-fit: cover;" />
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted fst-italic">No Image</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
