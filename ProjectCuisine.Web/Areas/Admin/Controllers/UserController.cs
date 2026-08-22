@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjectCuisine.Domain.Entities;
 using ProjectCuisine.Web.Models.Admin;
 
 namespace ProjectCuisine.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -18,15 +21,15 @@ namespace ProjectCuisine.Web.Areas.Admin.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var users = _userManager.Users.ToList();
+            var users = await _userManager.Users.ToListAsync();
 
             var userViewModels = new List<UserViewModel>();
 
             foreach (var user in users)
             {
-                var roles = _userManager.GetRolesAsync(user).Result;
+                var roles = await _userManager.GetRolesAsync(user);
 
                 userViewModels.Add(new UserViewModel
                 {
@@ -36,11 +39,10 @@ namespace ProjectCuisine.Web.Areas.Admin.Controllers
                 });
             }
 
-            var userRoles = _roleManager.Roles.
+            var userRoles = await _roleManager.Roles.
                                          Select(r => r.Name).
                                          Where(r => !string.IsNullOrEmpty(r)).
-                                         ToList();
-
+                                         ToListAsync();
             ViewBag.UserRoles = userRoles;
 
             return View(userViewModels);

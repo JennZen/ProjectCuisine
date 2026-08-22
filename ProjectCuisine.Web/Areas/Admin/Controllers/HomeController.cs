@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjectCuisine.Application.Interfaces.Services;
+using ProjectCuisine.Domain.Entities;
 using ProjectCuisine.Web.Models.Admin;
 
 namespace ProjectCuisine.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         private readonly IRecipeService _recipeService;
@@ -13,13 +18,15 @@ namespace ProjectCuisine.Web.Areas.Admin.Controllers
 
         private readonly IRegionService _regionService;
 
-        //for the user: private readonly IUserService _userService;
+        private readonly UserManager<User> _userManager;
 
-        public HomeController(IRecipeService recipeService, ICountryService countryService, IRegionService regionService)
+        public HomeController(IRecipeService recipeService, ICountryService countryService, 
+                IRegionService regionService, UserManager<User> userManager)
         {
             _recipeService = recipeService;
             _countryService = countryService;
             _regionService = regionService;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -29,7 +36,7 @@ namespace ProjectCuisine.Web.Areas.Admin.Controllers
                 TotalRecipes = await _recipeService.GetCountAsync(),
                 TotalCountries = await _countryService.GetCountAsync(),
                 TotalRegions = await _regionService.GetCountAsync(),
-                //TotalUsers = await _userService.GetCountAsync() 
+                TotalUsers = await _userManager.Users.CountAsync()
             };
 
             return View(model);

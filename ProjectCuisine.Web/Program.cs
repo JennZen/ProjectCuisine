@@ -7,6 +7,7 @@ using ProjectCuisine.Application.Services;
 using ProjectCuisine.Domain.Entities;
 using ProjectCuisine.Infrastructure.Data;
 using ProjectCuisine.Infrastructure.Repositories;
+using static System.Formats.Asn1.AsnWriter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,9 +59,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<ProjectCuisineDbContext>();
+var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<ProjectCuisineDbContext>();
 context.Database.Migrate();
 await DbSeeder.SeedAsync(context);
+
+var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+await RoleSeeder.SeedAsync(roleManager);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

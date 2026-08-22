@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectCuisine.Application.Interfaces.Repositories;
 using ProjectCuisine.Application.Interfaces.Services;
 
 namespace ProjectCuisine.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CountryController : Controller
     {
         private readonly ICountryService _countryService;
