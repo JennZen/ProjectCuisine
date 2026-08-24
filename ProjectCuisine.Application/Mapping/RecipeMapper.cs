@@ -20,6 +20,8 @@ namespace ProjectCuisine.Application.Mapping
         [MapProperty($"{nameof(Recipe.Country)}.{nameof(Country.Name)}", nameof(RecipeDetailsDto.CountryName))]
         public partial RecipeDetailsDto ToDetailsDto(Recipe recipe);
 
+        public partial List<RecipeDetailsDto> ToDetailsDtos(List<Recipe> recipes);
+
         [MapProperty($"{nameof(Recipe.Category)}.{nameof(Category.Name)}", nameof(RecipeListDto.CategoryName))]
         [MapProperty($"{nameof(Recipe.Country)}.{nameof(Country.Name)}", nameof(RecipeListDto.CountryName))]
         public partial RecipeListDto ToListDto(Recipe recipe);

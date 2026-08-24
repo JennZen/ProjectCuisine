@@ -11,6 +11,8 @@ namespace ProjectCuisine.Application.Interfaces.Services
     {
         public Task<List<RecipeListDto>> GetAllAsync();
 
+        public Task<List<RecipeDetailsDto>> GetAllDetailedAsync();
+
         public Task<List<RecipeListDto>> GetByCountryIdAsync(int countryId);
 
         public Task<RecipeDetailsDto?> GetByIdAsync(int id);
