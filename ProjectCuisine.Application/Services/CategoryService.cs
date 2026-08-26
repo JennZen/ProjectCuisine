@@ -27,5 +27,11 @@ namespace ProjectCuisine.Application.Services
             var categories = await _repository.GetAllAsync();
             return _mapper.ToDtos(categories);
         }
+
+        public async Task<CategoryDto?> GetByIdAsync(int id)
+        {
+            var category = await _repository.GetByIdAsync(id);
+            return category != null ? _mapper.ToDto(category) : null;
+        }
     }
 }

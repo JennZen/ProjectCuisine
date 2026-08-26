@@ -17,14 +17,16 @@ namespace ProjectCuisine.Application.Interfaces.Services
 
         public Task<RecipeDetailsDto?> GetByIdAsync(int id);
 
+        public Task<RecipeUpdateDto?> GetForUpdateByIdAsync(int id);
+
         public Task<List<RecipeListDto>> GetByCategoryAndCountryAsync(int categoryId, int countryId);
 
         public Task<int> GetCountAsync();
 
-        public Task UpdateAsync(RecipeUpdateDto recipeDto);
+        public Task<bool> UpdateAsync(RecipeUpdateDto recipeDto);
 
         public Task DeleteAsync(int id);
 
-        public Task CreateAsync(RecipeCreateDto recipeCreateDto);
+        public Task<bool> CreateAsync(RecipeCreateDto recipeCreateDto);
     }
 }

@@ -9,6 +9,8 @@ namespace ProjectCuisine.Application.Interfaces.Services
 {
     public interface ICategoryService
     {
-        Task<List<CategoryDto>> GetAllAsync();
+        public Task<List<CategoryDto>> GetAllAsync();
+
+        public Task<CategoryDto?> GetByIdAsync(int id);
     }
 }

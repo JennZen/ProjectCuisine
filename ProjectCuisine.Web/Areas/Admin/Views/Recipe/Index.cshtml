@@ -12,7 +12,7 @@
         </a>
     </div>
 
-    <form asp-action="Create" method="post" class="d-inline">
+    <form asp-action="Create" method="get" class="d-inline">
         <button type="submit" class="btn btn-sm btn-outline-primary mb-4">
             Create new recipe
         </button>
@@ -73,7 +73,7 @@
                                                 Delete
                                             </button>
                                         </form>
-                                        <form asp-action="Update" method="post" class="d-inline">
+                                        <form asp-action="Edit" method="get" class="d-inline">
                                             <input type="hidden" name="id" value="@recipe.Id" />
 
                                             <button type="submit" class="btn btn-sm btn-outline-primary">
